@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS School Hub — Balingit Family</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2b22;--forest:#1e3d2b;--moss:#2e6644;--sage:#4f8c63;--mint:#9dcfae;
+  --cream:#f6f1e8;--parchment:#ece5d5;--warm:#e0d5be;
+  --gold:#c9963c;--rust:#c04e30;--sky:#3a7ca8;--lav:#7b6fa8;--muted:#6a7a6a;
+  --wa-bg:#eef6f1;--wa-bd:#9dcfae;--wa-lbl:#2e6644;
+  --wb-bg:#f0f0f8;--wb-bd:#b0a8d8;--wb-lbl:#5a5090;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--cream);font-family:'Nunito',sans-serif;color:var(--ink);}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+
+/* ── HEADER ── */
+.hdr{padding:32px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:2px solid var(--warm);margin-bottom:20px;flex-wrap:wrap;}
+.bcs-pill{display:inline-flex;align-items:center;gap:6px;background:var(--forest);color:var(--mint);border-radius:100px;padding:4px 14px 4px 10px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.bcs-pill::before{content:'🌿';}
+h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.05;color:var(--forest);}
+h1 i{font-weight:300;font-style:italic;color:var(--sage);}
+.hdr-right{text-align:right;}
+.kids{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px;}
+.kid{background:var(--moss);color:#fff;border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;}
+.kid.b{background:var(--sky);}
+.sync{font-size:11px;color:var(--muted);}
+
+/* ── URGENT BANNER ── */
+.urgent-banner{display:none;background:linear-gradient(135deg,#b83a1e,#d4603e);color:#fff;border-radius:14px;padding:14px 20px;margin-bottom:18px;gap:14px;align-items:center;animation:slideIn .4s ease;}
+.urgent-banner.show{display:flex;}
+.ub-icon{font-size:24px;flex-shrink:0;}
+.ub-text h3{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;margin-bottom:2px;}
+.ub-text p{font-size:12.5px;opacity:.92;}
+.ub-badge{margin-left:auto;background:rgba(255,255,255,.2);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;white-space:nowrap;flex-shrink:0;}
+
+/* ── LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:18px;padding:12px 16px;background:white;border-radius:12px;box-shadow:0 1px 8px rgba(30,61,43,.06);align-items:center;}
+.leg-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);width:100%;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;}
+.ls{width:14px;height:14px;border-radius:3px;flex-shrink:0;}
+.ls-a{background:var(--wa-bg);border:2px solid var(--wa-bd);}
+.ls-b{background:var(--wb-bg);border:2px solid var(--wb-bd);}
+.ls-u{background:rgba(192,78,48,.15);border:2px solid var(--rust);}
+.ls-e{background:rgba(58,124,168,.12);border:2px solid var(--sky);}
+.ls-s{background:rgba(201,150,60,.12);border:2px solid var(--gold);}
+.ls-n{background:rgba(46,102,68,.12);border:2px solid var(--moss);}
+.ls-t{background:rgba(123,111,168,.12);border:2px solid var(--lav);}
+.ls-today{background:var(--forest);border-radius:50%;border:2px solid var(--forest);}
+
+/* ── MAIN LAYOUT ── */
+.main{display:grid;grid-template-columns:1fr 300px;gap:24px;margin-bottom:32px;}
+@media(max-width:760px){.main{grid-template-columns:1fr;}}
+
+/* ── CALENDAR ── */
+.cal-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 2px 20px rgba(30,61,43,.09);}
+.cal-nav{background:var(--forest);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+.cal-nav-btn{background:rgba(255,255,255,.12);border:none;color:white;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.cal-nav-btn:hover{background:rgba(255,255,255,.25);}
+.cal-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:white;}
+.cal-subtitle{font-size:.8rem;color:var(--mint);font-weight:300;margin-top:1px;}
+.cal-daynames{display:grid;grid-template-columns:36px repeat(7,1fr);background:rgba(30,61,43,.06);padding:6px 0;}
+.cal-dn{text-align:center;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+.cal-dn.wk{color:rgba(100,120,100,.6);}
+.cal-week{display:grid;grid-template-columns:36px repeat(7,1fr);border-bottom:1px solid rgba(200,200,190,.35);}
+.cal-week:last-child{border-bottom:none;}
+.cal-week.wa{background:var(--wa-bg);}
+.cal-week.wb{background:var(--wb-bg);}
+.cal-week.past{opacity:.62;filter:grayscale(22%);}
+.wk-lbl{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;font-weight:500;writing-mode:vertical-rl;transform:rotate(180deg);border-right:3px solid;letter-spacing:.1em;padding:3px 0;}
+.wa .wk-lbl{color:var(--wa-lbl);border-color:var(--wa-bd);background:rgba(157,207,174,.15);}
+.wb .wk-lbl{color:var(--wb-lbl);border-color:var(--wb-bd);background:rgba(176,168,216,.15);}
+.cal-cell{min-height:68px;padding:6px 4px 4px;border-left:1px solid rgba(200,200,190,.3);position:relative;}
+.cal-cell.om{opacity:.28;}
+.cal-cell.past-day:not(.today){background:rgba(0,0,0,.015);}
+.cal-cell.wknd .dn{color:var(--muted);}
+.dn{font-size:13px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:2px;display:inline-block;}
+.cal-cell.today .dn{background:var(--forest);color:white;border-radius:50%;width:23px;height:23px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.chips{display:flex;flex-direction:column;gap:2px;margin-top:1px;}
+.chip{font-size:9px;font-weight:700;line-height:1.3;border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;position:relative;cursor:pointer;}
+.chip:hover .tt{display:block;}
+.chip-u{background:rgba(192,78,48,.13);color:var(--rust);border-left:3px solid var(--rust);}
+.chip-e{background:rgba(58,124,168,.11);color:var(--sky);border-left:3px solid var(--sky);}
+.chip-s{background:rgba(201,150,60,.11);color:#7a5a08;border-left:3px solid var(--gold);}
+.chip-n{background:rgba(46,102,68,.11);color:var(--moss);border-left:3px solid var(--moss);}
+.chip-t{background:rgba(123,111,168,.11);color:var(--lav);border-left:3px solid var(--lav);}
+.chip.dim{opacity:.55;}
+.tt{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--ink);color:#fff;border-radius:8px;padding:8px 11px;font-size:11px;line-height:1.5;width:200px;z-index:500;box-shadow:0 4px 18px rgba(0,0,0,.26);pointer-events:none;}
+.tt b{display:block;margin-bottom:3px;font-size:11.5px;}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:16px;}
+.s-card{background:white;border-radius:16px;padding:18px;box-shadow:0 2px 14px rgba(30,61,43,.07);}
+.s-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--forest);margin-bottom:12px;}
+.ev-list{display:flex;flex-direction:column;}
+.ev-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(200,200,190,.3);}
+.ev-item:last-child{border-bottom:none;}
+.ev-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.d-u{background:var(--rust);}.d-e{background:var(--sky);}.d-s{background:var(--gold);}.d-n{background:var(--moss);}
+.ev-db{min-width:36px;text-align:center;background:var(--parchment);border-radius:7px;padding:3px 4px;flex-shrink:0;}
+.ev-db .dd{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;line-height:1;color:var(--forest);}
+.ev-db .mm{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+.ev-title{font-size:12px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px;}
+.ev-sub{font-size:11px;color:var(--muted);line-height:1.35;}
+
+/* ── WEEK NOTES ── */
+.notes-section{margin-bottom:40px;}
+.notes-hdr{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--forest);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.notes-hdr .wk-badge{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;background:var(--forest);color:var(--mint);padding:3px 12px;border-radius:100px;letter-spacing:.08em;}
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.note-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(30,61,43,.07);animation:fadeUp .35s ease both;}
+.note-card:nth-child(2){animation-delay:.08s;}
+.note-card:nth-child(3){animation-delay:.16s;}
+.note-card:nth-child(4){animation-delay:.24s;}
+.nc-head{padding:14px 18px 12px;border-bottom:1px solid rgba(200,200,190,.3);display:flex;gap:10px;align-items:flex-start;}
+.nc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ic-g{background:rgba(46,102,68,.12);}
+.ic-b{background:rgba(58,124,168,.12);}
+.ic-y{background:rgba(201,150,60,.12);}
+.ic-p{background:rgba(123,111,168,.12);}
+.nc-meta{flex:1;}
+.nc-from{font-size:12px;font-weight:700;color:var(--forest);margin-bottom:1px;}
+.nc-sub{font-size:11px;color:var(--muted);}
+.nc-date{font-size:10px;color:var(--muted);margin-top:2px;}
+.nc-tag{font-size:10px;font-weight:700;padding:2px 9px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.tg-g{background:rgba(46,102,68,.1);color:var(--moss);}
+.tg-b{background:rgba(58,124,168,.1);color:var(--sky);}
+.tg-r{background:rgba(192,78,48,.1);color:var(--rust);}
+.tg-p{background:rgba(123,111,168,.1);color:var(--lav);}
+.nc-body{padding:14px 18px;}
+.nc-body p{font-size:12.5px;line-height:1.65;color:var(--ink);margin-bottom:10px;}
+.nc-body p:last-child{margin-bottom:0;}
+.hi-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.hi{display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.4;color:#2a3a2a;}
+.hi-ic{flex-shrink:0;font-size:13px;}
+.action-box{background:rgba(192,78,48,.06);border:1px solid rgba(192,78,48,.2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--rust);font-weight:600;display:flex;gap:7px;align-items:flex-start;margin-top:10px;}
+
+footer{border-top:1px solid var(--warm);padding:20px 0 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.ft-note{font-size:11px;color:var(--muted);}
+.ft-brand{font-family:'Fraunces',serif;font-size:13px;color:var(--sage);font-weight:700;}
+
+@keyframes slideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <div class="bcs-pill">Berlin Cosmopolitan School</div>
+    <h1>School <i>Hub</i><br>Balingit Family</h1>
+  </div>
+  <div class="hdr-right">
+    <div class="kids">
+      <div class="kid">🧒 Elias · 4C</div>
+      <div class="kid b">🧒 Isagani</div>
+    </div>
+    <div class="sync">Synced from Toddle · 2 March 2026</div>
+  </div>
+</div>
+
+<!-- URGENT BANNER -->
+<div class="urgent-banner show" id="urgentBanner">
+  <div class="ub-icon">⚠️</div>
+  <div class="ub-text">
+    <h3>Action Required: Photo & Video Consent Form</h3>
+    <p>Required for 6K United Concert (Grades 2–6). Send digitally to German teacher or print and send with child.</p>
+  </div>
+  <div class="ub-badge">Due: 3 Mar</div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="leg-title">Legend</div>
+  <div class="leg-item"><div class="ls ls-a"></div>A Week – sport Fri</div>
+  <div class="leg-item"><div class="ls ls-b"></div>B Week – no sport Fri</div>
+  <div class="leg-item"><div class="ls ls-u"></div>Action required</div>
+  <div class="leg-item"><div class="ls ls-e"></div>School event</div>
+  <div class="leg-item"><div class="ls ls-s"></div>Deadline / opportunity</div>
+  <div class="leg-item"><div class="ls ls-n"></div>Nature Campus</div>
+  <div class="leg-item"><div class="ls ls-t"></div>Announcement</div>
+  <div class="leg-item"><div class="ls ls-today"></div>Today</div>
+</div>
+
+<!-- MAIN: CALENDAR + SIDEBAR -->
+<div class="main">
+
+  <!-- CALENDAR -->
+  <div>
+    <div class="cal-card">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <div>
+          <div class="cal-title" id="calTitle"></div>
+          <div class="cal-subtitle" id="calSub"></div>
+        </div>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="cal-daynames">
+        <div></div>
+        <div class="cal-dn">Mon</div><div class="cal-dn">Tue</div><div class="cal-dn">Wed</div>
+        <div class="cal-dn">Thu</div><div class="cal-dn">Fri</div>
+        <div class="cal-dn wk">Sat</div><div class="cal-dn wk">Sun</div>
+      </div>
+      <div id="calGrid"></div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="s-card">
+      <div class="s-title">📌 Upcoming Events</div>
+      <div class="ev-list">
+        <div class="ev-item">
+          <div class="ev-dot d-u"></div>
+          <div class="ev-db"><div class="dd">3</div><div class="mm">Mar</div></div>
+          <div><div class="ev-title">⚠️ Consent Form Deadline</div><div class="ev-sub">Photo/video for 6K Concert · Required!</div></div>
+        </div>
+        <div class="ev-item">
+          <div class="ev-dot d-s"></div>
+          <div class="ev-db"><div class="dd">5</div><div class="mm">Mar</div></div>
+          <div><div class="ev-title">🏊 Swimming Reg. Opens</div><div class="ev-sub">17:00 online · Gr 4–6 · Free!</div></div>
+        </div>
+        <div class="ev-item">
+          <div class="ev-dot d-n"></div>
+          <div class="ev-db"><div class="dd">~</div><div class="mm">Apr</div></div>
+          <div><div class="ev-title">🌊 Easter Swimming Courses</div><div class="ev-sub">8 days · Free · Berlin pools</div></div>
+        </div>
+        <div class="ev-item">
+          <div class="ev-dot d-e"></div>
+          <div class="ev-db"><div class="dd">12</div><div class="mm">Jun</div></div>
+          <div><div class="ev-title">🎵 6K United Concert</div><div class="ev-sub">Grades 2–6 · Families invited</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-card" style="background:var(--forest)">
+      <div class="s-title" style="color:var(--mint)">🔗 Quick Links</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <a href="https://wiki.cosmopolitanschool.de" target="_blank" style="color:var(--cream);font-size:12px;text-decoration:none;background:rgba(255,255,255,.1);padding:7px 11px;border-radius:8px;display:block">📖 BCS Parent Wiki</a>
+        <a href="https://forms.office.com/e/AahEA3Fu2C" target="_blank" style="color:var(--cream);font-size:12px;text-decoration:none;background:rgba(255,255,255,.1);padding:7px 11px;border-radius:8px;display:block">🚶 Independent Dismissal Form</a>
+        <a href="https://www.schwimmkurse-sportjugend.de/angebote-grundschule" target="_blank" style="color:var(--cream);font-size:12px;text-decoration:none;background:rgba(255,255,255,.1);padding:7px 11px;border-radius:8px;display:block">🏊 Swimming Registration</a>
+        <a href="https://forms.office.com/e/26f2kPhtmf" target="_blank" style="color:var(--cream);font-size:12px;text-decoration:none;background:rgba(255,255,255,.1);padding:7px 11px;border-radius:8px;display:block">🤧 Allergy List Form</a>
+      </div>
+      <div style="font-size:10.5px;color:var(--sage);margin-top:10px;">Wiki: bcsparents / Cosmo-Family2025#</div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY NOTES -->
+<div class="notes-section">
+  <div class="notes-hdr">
+    Weekly Notes
+    <span class="wk-badge" id="currentWkBadge">CURRENT WEEK</span>
+  </div>
+  <div class="notes-grid" id="notesGrid"></div>
+</div>
+
+<footer>
+  <div class="ft-note">Synced from Toddle emails · Berlin Cosmopolitan School · Primary</div>
+  <div class="ft-brand">BCS School Hub 🌿</div>
+</footer>
+</div>
+
+<script>
+// ─── CONFIG ────────────────────────────────────────────
+const TODAY = new Date(2026, 2, 2); // March 2 2026
+const ANCHOR_MON = new Date(2026, 1, 23); // Feb 23 = A Week anchor
+
+function getMon(d) {
+  const x = new Date(d);
+  const dow = x.getDay();
+  x.setDate(x.getDate() - (dow === 0 ? 6 : dow - 1));
+  x.setHours(0,0,0,0);
+  return x;
+}
+function weekType(mon) {
+  const diff = Math.round((mon - ANCHOR_MON) / (7*86400000));
+  return diff % 2 === 0 ? 'A' : 'B';
+}
+function sameDay(a,b){ return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate(); }
+function isPast(d){ const e=new Date(d);e.setHours(23,59,59,999);return e<TODAY; }
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// ─── EVENTS ────────────────────────────────────────────
+const EVENTS = {
+  '2026-2-2':  [{t:'t',l:'📚 Book Exchange',tip:'Book exchange before Winter Vacation Program.'}],
+  '2026-2-4':  [{t:'t',l:'🚌 Bus Update',tip:'Important bus update from school — check Toddle for details.'}],
+  '2026-2-6':  [{t:'s',l:'📋 Early Dismissal',tip:'Report cards given. No clubs. City pickup by 16:00. Nature Campus bus 15:30.'}],
+  '2026-2-13': [{t:'t',l:'🚌 Pick-Up Procedures',tip:'Important info on extraordinary and routine pick-up procedures from Tanya Diaz.'}],
+  '2026-2-17': [{t:'e',l:'🎭 Fasching & Lunar NY',tip:'School provides refreshments incl. Pfannekuchen. No outside snacks needed.'}],
+  '2026-2-20': [
+    {t:'e',l:'✏️ End of Unit Celebration',tip:'4C: students present research & cultural objects. Parents invited!'},
+    {t:'n',l:'🎪 SEL Club Sampler 15:00',tip:'Nature Campus: clubs 15:15, community buffet 16:00, bowling 16:30. Bus to Mitte 17:00.'}
+  ],
+  '2026-2-23': [{t:'t',l:'📬 Weekly Update',tip:'Unit 4 begins: Technologies & Society. A Week. Spelling tests Thursdays.'}],
+  '2026-3-1':  [{t:'t',l:'📰 Newsletter #8',tip:'BCS Primary newsletter #8 published in EN & DE. School clothing reminder.'}],
+  '2026-3-2':  [{t:'t',l:'🏊 Swimming Info',tip:'Free Easter intensive swimming courses announced for Grades 4–6.'}],
+  '2026-3-3':  [{t:'u',l:'⚠️ Consent Deadline',tip:'Photo & video consent for 6K United Concert DUE TODAY. No form = no participation.'}],
+  '2026-3-5':  [{t:'s',l:'🏊 Swimming Reg. 17:00',tip:'Register at schwimmkurse-sportjugend.de — first come, first served. Activate email code within 72h.'}],
+  '2026-3-12': [{t:'t',l:'🔤 Spelling Test · 4C',tip:'Weekly spelling test for Elias (Class 4C). Tests every Thursday.'}],
+  '2026-6-12': [{t:'e',l:'🎵 6K United Concert',tip:'Grades 2–6. Families invited. Consent form required (deadline was 3 Mar).'}],
+};
+
+// ─── WEEKLY NOTES ──────────────────────────────────────
+// Keyed by ISO monday date string "YYYY-M-D"
+const WEEK_NOTES = {
+  '2026-2-2': [
+    {icon:'📚',cls:'ic-p',from:'Tanya Diaz · SEL Team',sub:'Book Exchange + Winter Program · Both children',date:'2 Feb 2026',tag:'Announcement',tg:'tg-p',
+     body:'Book exchange taking place before the Winter Vacation Program. Please ensure your children bring books to exchange.',
+     highlights:[
+       {ic:'📖',t:'Book exchange happening this week — bring books to swap'},
+       {ic:'❄️',t:'Winter Vacation Program details to follow'},
+     ]},
+    {icon:'🚌',cls:'ic-y',from:'Katharina Ehrenfried · Primary',sub:'Bus Update · Both children',date:'4 Feb 2026',tag:'Important',tg:'tg-r',
+     body:'Important bus update: school bus was temporarily out of service and will return the following afternoon.',
+     highlights:[
+       {ic:'🚌',t:'Bus back in service from the afternoon of 5 Feb'},
+       {ic:'📞',t:'Contact school if you need alternative pick-up arrangements'},
+     ]},
+  ],
+  '2026-2-9': [
+    {icon:'🚶',cls:'ic-b',from:'Tanya Diaz · SEL Team',sub:'Pick-Up Procedures · Both children',date:'13 Feb 2026',tag:'Important Info',tg:'tg-b',
+     body:'Important information sent about both extraordinary and routine pick-up procedures for City and Nature Campus.',
+     highlights:[
+       {ic:'🏙️',t:'City Campus: Tanya Diaz (diaz@cosmopolitanschool.de)'},
+       {ic:'🌲',t:'Nature Campus: Cornelia John (john@cosmopolitanschool.de)'},
+       {ic:'🚶',t:'Independent dismissal form: forms.office.com/e/AahEA3Fu2C'},
+     ]},
+    {icon:'🎭',cls:'ic-y',from:'Heather Newkirk · SEL',sub:'Fasching Party & End of Unit · Both children',date:'12 Feb 2026',tag:'Upcoming Event',tg:'tg-g',
+     body:'Updates on two upcoming celebrations: Fasching/Lunar New Year on Feb 17 and End of Unit on Feb 20.',
+     highlights:[
+       {ic:'🎭',t:'Feb 17: Fasching & Lunar New Year — school provides Pfannekuchen, no outside snacks needed'},
+       {ic:'🎪',t:'Feb 20: Club Sampler 15:10–16:00, buffet 16:00–16:30, bowling 16:30–18:00 at Nature Campus'},
+       {ic:'🥗',t:'Potluck: A–H bring desserts, I–M savory, N–S salads/fruit, T–Z breads'},
+       {ic:'🚌',t:'Bus to Mitte departs 17:00 — email Heather to reserve a seat'},
+     ]},
+  ],
+  '2026-2-16': [
+    {icon:'✏️',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'End of Unit Celebration · Elias',date:'17 Feb 2026',tag:'Class Update',tg:'tg-g',
+     body:'Reminder about the End of Unit Celebration this Friday. Students will share research and their "chosen object" from their cultural heritage project.',
+     highlights:[
+       {ic:'🗓️',t:'Friday 20 Feb — parents invited to attend'},
+       {ic:'🏺',t:'Ask Elias to bring his chosen cultural object for display'},
+       {ic:'🤝',t:'Students will view each other\'s objects — a multicultural showcase!'},
+     ]},
+    {icon:'🦟',cls:'ic-p',from:'Daniel Vevers · 4C',sub:'Head Lice Notice · Both children',date:'17 Feb 2026',tag:'Health Notice',tg:'tg-p',
+     body:'A head lice case was identified at Nature Campus. Please check your children\'s hair and treat if necessary.',
+     highlights:[
+       {ic:'🔍',t:'Check children\'s hair for lice or nits'},
+       {ic:'💊',t:'Treat with appropriate shampoo if found'},
+       {ic:'🏫',t:'Children can return to school once treated'},
+     ],
+     action:'⚠️ Please check Elias & Isagani\'s hair this weekend'},
+    {icon:'🌍',cls:'ic-b',from:'Katharina Ehrenfried · Primary',sub:'Home Language Day · Upper Primary',date:'17 Feb 2026',tag:'Announcement',tg:'tg-b',
+     body:'Home Language Day coming up for Upper Primary students — a celebration of the many languages spoken in the BCS community.',
+     highlights:[
+       {ic:'🗣️',t:'Students encouraged to share words/phrases from their home language'},
+       {ic:'🌿',t:'Celebrates BCS multilingual community'},
+     ]},
+  ],
+  '2026-2-23': [
+    {icon:'🌱',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'Weekly Update · Elias',date:'23 Feb 2026',tag:'Weekly Update',tg:'tg-g',
+     body:'Unit 4 has launched: "How the World Works — Technologies Impact Society and the Environment." Focus attributes: Reflective & Communicators.',
+     highlights:[
+       {ic:'📐',t:'Long division introduced — continue practising at home'},
+       {ic:'⌨️',t:'TypeDojo touch-typing accounts created'},
+       {ic:'🪨',t:'Stone-age technology explored with creative tableaux scenes'},
+       {ic:'📚',t:'Library session with Herr Feldman'},
+       {ic:'🔤',t:'New spelling words — test every Thursday!'},
+       {ic:'📅',t:'This week = A Week (sport on Friday)'},
+     ],
+     action:'⚠️ Ensure Elias has a fully-stocked pencil case'},
+    {icon:'📸',cls:'ic-y',from:'Katharina Ehrenfried · Primary',sub:'6K United Concert Consent · Elias',date:'22 Feb 2026',tag:'Action Required',tg:'tg-r',
+     body:'Photo & video consent required for the 6K United Concert on 12 June 2026. Without it, Elias cannot participate.',
+     highlights:[
+       {ic:'📋',t:'Submit form digitally to German teacher OR print & send with Elias'},
+       {ic:'🗓️',t:'Deadline: 3 March — do not miss this!'},
+       {ic:'🎤',t:'Rehearsal room password: 6-zu-dem-K-2026'},
+       {ic:'✅',t:'Toddle assignment will track form receipt per class'},
+     ],
+     action:'⚠️ URGENT: Submit consent form by 3 March'},
+  ],
+  '2026-3-2': [
+    {icon:'📰',cls:'ic-g',from:'Katharina Ehrenfried · Primary',sub:'Newsletter #8 · Both children',date:'1 Mar 2026',tag:'Newsletter',tg:'tg-g',
+     body:'BCS Primary Newsletter #8 is now available on Toddle in English and Deutsch. Includes upcoming events, pedagogical insights and school updates.',
+     highlights:[
+       {ic:'👕',t:'School clothing: solid-coloured trousers, dark shoes — no crop tops or make-up in Primary'},
+       {ic:'🛍️',t:'New school clothing items: T-shirts, shorts, sports shirt, sweatpants'},
+       {ic:'🌿',t:'End of Unit Celebration recap included'},
+     ]},
+    {icon:'🏊',cls:'ic-b',from:'Javier Hoballah · Sports',sub:'Easter Swimming Courses · Both children',date:'1 Mar 2026',tag:'Opportunity',tg:'tg-b',
+     body:'Free 8-day intensive swimming courses during Easter holidays for Grades 4–6 students who do not yet have the Bronze Youth Swimming Badge.',
+     highlights:[
+       {ic:'🎯',t:'Goal: earn Seepferdchen and/or Bronze badge'},
+       {ic:'💰',t:'Completely FREE — organised by Berlin Senate'},
+       {ic:'📍',t:'9 indoor pools across Berlin'},
+       {ic:'⏰',t:'Registration opens 5 March at 17:00 — first come, first served!'},
+       {ic:'📧',t:'Activate 6-digit email confirmation code within 72 hours'},
+     ],
+     action:'⚠️ Register at schwimmkurse-sportjugend.de on 5 March at 17:00 sharp'},
+  ],
+};
+
+// ─── CALENDAR RENDER ───────────────────────────────────
+let curDate = new Date(2026, 2, 1); // start on March
+
+function renderCalendar() {
+  const yr = curDate.getFullYear();
+  const mo = curDate.getMonth();
+
+  document.getElementById('calTitle').textContent = MONTHS[mo] + ' ' + yr;
+
+  // figure out current week type for subtitle
+  const curMon = getMon(TODAY);
+  const wt = weekType(curMon);
+  document.getElementById('calSub').textContent = `Currently: ${wt} Week · ${wt==='A'?'Sport on Friday':'No sport Friday'}`;
+  document.getElementById('currentWkBadge').textContent = wt + ' WEEK';
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const firstDay = new Date(yr, mo, 1);
+  const lastDay  = new Date(yr, mo+1, 0);
+  let wStart = getMon(firstDay);
+
+  while (wStart <= lastDay) {
+    const wt2 = weekType(wStart);
+    const wEnd = new Date(wStart); wEnd.setDate(wEnd.getDate()+6);
+    const allPast = wEnd < TODAY;
+
+    const row = document.createElement('div');
+    row.className = `cal-week w${wt2.toLowerCase()}${allPast?' past':''}`;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'wk-lbl';
+    lbl.textContent = wt2+' WK';
+    row.appendChild(lbl);
+
+    for (let d=0; d<7; d++) {
+      const cd = new Date(wStart); cd.setDate(cd.getDate()+d);
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      if (d>=5) cell.classList.add('wknd');
+      if (cd.getMonth()!==mo) cell.classList.add('om');
+      if (sameDay(cd,TODAY)) cell.classList.add('today');
+      if (isPast(cd)&&!sameDay(cd,TODAY)) cell.classList.add('past-day');
+
+      const dn = document.createElement('div');
+      dn.className='dn'; dn.textContent=cd.getDate();
+      cell.appendChild(dn);
+
+      const key=`${cd.getFullYear()}-${cd.getMonth()+1}-${cd.getDate()}`;
+      const evs=EVENTS[key]||[];
+      if (evs.length) {
+        const chips=document.createElement('div'); chips.className='chips';
+        evs.forEach(ev=>{
+          const c=document.createElement('div');
+          c.className=`chip chip-${ev.t}${isPast(cd)?' dim':''}`;
+          c.textContent=ev.l;
+          if(ev.tip){const tt=document.createElement('div');tt.className='tt';tt.innerHTML=`<b>${ev.l}</b>${ev.tip}`;c.appendChild(tt);}
+          chips.appendChild(c);
+        });
+        cell.appendChild(chips);
+      }
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+    wStart=new Date(wStart); wStart.setDate(wStart.getDate()+7);
+  }
+
+  renderNotes(yr, mo);
+}
+
+function changeMonth(dir) {
+  curDate = new Date(curDate.getFullYear(), curDate.getMonth()+dir, 1);
+  renderCalendar();
+}
+
+// ─── NOTES RENDER ──────────────────────────────────────
+function renderNotes(yr, mo) {
+  const grid = document.getElementById('notesGrid');
+  grid.innerHTML = '';
+
+  // collect all week mondays that fall in this month
+  const firstDay = new Date(yr, mo, 1);
+  const lastDay  = new Date(yr, mo+1, 0);
+  let wStart = getMon(firstDay);
+  const weekKeys = new Set();
+
+  while (wStart <= lastDay) {
+    const key = `${wStart.getFullYear()}-${wStart.getMonth()+1}-${wStart.getDate()}`;
+    weekKeys.add(key);
+    wStart = new Date(wStart); wStart.setDate(wStart.getDate()+7);
+  }
+
+  // also include prior month's weeks that have notes relevant to this view
+  let found = false;
+  weekKeys.forEach(key => {
+    if (WEEK_NOTES[key]) {
+      WEEK_NOTES[key].forEach((note, i) => {
+        found = true;
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        card.style.animationDelay = (i * 0.08) + 's';
+
+        const isPastNote = isPast(new Date(note.date));
+        let hiHTML = note.highlights ? note.highlights.map(h=>`<div class="hi"><span class="hi-ic">${h.ic}</span><span>${h.t}</span></div>`).join('') : '';
+        let actionHTML = note.action ? `<div class="action-box">⚠️ ${note.action.replace('⚠️ ','')}</div>` : '';
+
+        card.innerHTML = `
+          <div class="nc-head">
+            <div class="nc-icon ${note.cls}">${note.icon}</div>
+            <div class="nc-meta">
+              <div class="nc-from">${note.from}</div>
+              <div class="nc-sub">${note.sub}</div>
+              <div class="nc-date">${note.date}</div>
+            </div>
+            <span class="nc-tag ${note.tg}">${note.tag}</span>
+          </div>
+          <div class="nc-body">
+            <p>${note.body}</p>
+            ${hiHTML ? `<div class="hi-list">${hiHTML}</div>` : ''}
+            ${actionHTML}
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+  });
+
+  if (!found) {
+    grid.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:20px 0;">No notes for this month yet.</div>`;
+  }
+}
+
+// ─── INIT ──────────────────────────────────────────────
+renderCalendar();
+
+// Hide urgent banner after 3 March
+const deadline = new Date(2026, 2, 4);
+if (TODAY >= deadline) {
+  document.getElementById('urgentBanner').classList.remove('show');
+}
+</script>
+</body>
+</html>
