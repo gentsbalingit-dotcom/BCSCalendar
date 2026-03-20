@@ -138,17 +138,17 @@ footer{border-top:1px solid var(--warm);padding:20px 0 36px;display:flex;justify
       <div class="kid">🧒 Elias · 4C</div>
       <div class="kid b">🧒 Isagani</div>
     </div>
-    <div class="sync">Synced from Toddle · 6 March 2026</div>
+    <div class="sync">Synced from Toddle · 20 March 2026</div>
   </div>
 </div>
 
 <div class="urgent-banner show">
-  <div class="ub-icon">🏄</div>
+  <div class="ub-icon">📚</div>
   <div class="ub-text">
-    <h3>Two Things Needed: Spring Program + Water Sports Kit</h3>
-    <p>Register for Spring Vacation Program by 20 Mar. Buy neoprene wetsuit + water shoes for Elias before Water Sports starts 1 May.</p>
+    <h3>End of Unit 4 Celebration — Fri 27 March, 14:20</h3>
+    <p>Parents invited to 4C celebration at 14:20. Also: bring a book by Wed 25 Mar for the Spring Vacation Book Exchange on Fri 27 Mar.</p>
   </div>
-  <div class="ub-badge">Spring: 20 Mar</div>
+  <div class="ub-badge">Fri 27 Mar</div>
 </div>
 
 <div class="legend">
@@ -189,9 +189,19 @@ footer{border-top:1px solid var(--warm);padding:20px 0 36px;display:flex;justify
       <div class="s-title">📌 Upcoming Events</div>
       <div class="ev-list">
         <div class="ev-item">
-          <div class="ev-dot d-u"></div>
-          <div class="ev-db"><div class="dd">20</div><div class="mm">Mar</div></div>
-          <div><div class="ev-title">🌸 Spring Program Deadline</div><div class="ev-sub">Register by midnight · City or Nature Campus</div></div>
+          <div class="ev-dot d-s"></div>
+          <div class="ev-db"><div class="dd">25</div><div class="mm">Mar</div></div>
+          <div><div class="ev-title">📖 Book Drop-off Deadline</div><div class="ev-sub">Drop book to classroom teacher for exchange</div></div>
+        </div>
+        <div class="ev-item">
+          <div class="ev-dot d-e"></div>
+          <div class="ev-db"><div class="dd">27</div><div class="mm">Mar</div></div>
+          <div><div class="ev-title">✏️ End of Unit 4 Celebration</div><div class="ev-sub">Parents invited 14:20 · 4C · Mr Vevers</div></div>
+        </div>
+        <div class="ev-item">
+          <div class="ev-dot d-e"></div>
+          <div class="ev-db"><div class="dd">27</div><div class="mm">Mar</div></div>
+          <div><div class="ev-title">📚 Book Exchange</div><div class="ev-sub">Spring Vacation Book Exchange during school</div></div>
         </div>
         <div class="ev-item">
           <div class="ev-dot d-n"></div>
@@ -212,11 +222,6 @@ footer{border-top:1px solid var(--warm);padding:20px 0 36px;display:flex;justify
           <div class="ev-dot d-e"></div>
           <div class="ev-db"><div class="dd">12</div><div class="mm">Jun</div></div>
           <div><div class="ev-title">🎵 6K United Concert</div><div class="ev-sub">Grades 2–6 · Families invited</div></div>
-        </div>
-        <div class="ev-item">
-          <div class="ev-dot d-e"></div>
-          <div class="ev-db"><div class="dd">6</div><div class="mm">Jul</div></div>
-          <div><div class="ev-title">🏕️ Water Sports Camp</div><div class="ev-sub">6–8 Jul · Closing party 8 Jul 14:00</div></div>
         </div>
       </div>
     </div>
@@ -246,7 +251,7 @@ footer{border-top:1px solid var(--warm);padding:20px 0 36px;display:flex;justify
 </div>
 
 <script>
-const TODAY = new Date(2026, 2, 6);
+const TODAY = new Date(2026, 2, 20);
 const ANCHOR_MON = new Date(2026, 1, 23);
 function getMon(d){const x=new Date(d);const dow=x.getDay();x.setDate(x.getDate()-(dow===0?6:dow-1));x.setHours(0,0,0,0);return x;}
 function weekType(mon){const diff=Math.round((mon-ANCHOR_MON)/(7*86400000));return diff%2===0?'A':'B';}
@@ -255,112 +260,156 @@ function isPast(d){const e=new Date(d);e.setHours(23,59,59,999);return e<TODAY;}
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 const EVENTS = {
-  '2026-2-6':  [{t:'s',l:'📋 Early Dismissal',tip:'Report cards given. No clubs. City pickup 16:00. Nature Campus bus 15:30.'}],
+  // February (past)
+  '2026-2-6':  [{t:'s',l:'📋 Early Dismissal',tip:'Report cards. No clubs. City pickup 16:00. Nature Campus bus 15:30.'}],
   '2026-2-17': [{t:'e',l:'🎭 Fasching & Lunar NY',tip:'School provides Pfannekuchen. No outside snacks needed.'}],
-  '2026-2-20': [{t:'e',l:'✏️ End of Unit Celebration',tip:'4C presents research & cultural objects. Parents invited!'},{t:'n',l:'🎪 SEL Club Sampler',tip:'Nature Campus: clubs 15:15, buffet 16:00, bowling 16:30. Bus to Mitte 17:00.'}],
+  '2026-2-20': [{t:'e',l:'✏️ End of Unit Celebration',tip:'4C presents research & cultural objects. Parents invited!'},{t:'n',l:'🎪 SEL Club Sampler',tip:'Nature Campus: clubs 15:15, buffet 16:00, bowling 16:30.'}],
   '2026-2-23': [{t:'t',l:'📬 Weekly Update',tip:'Unit 4 begins: Technologies & Society. A Week. Spelling tests Thursdays.'}],
-  '2026-3-1':  [{t:'t',l:'📰 Newsletter #8',tip:'BCS Primary newsletter #8 in EN & DE. School clothing reminder.'}],
-  '2026-3-3':  [{t:'n',l:'🌸 Spring Program Info',tip:'Spring Vacation Program announced. Sessions Mar 30–Apr 2 and Apr 7–10.'},{t:'e',l:'🌈 Holi Info',tip:'Holi celebration on 4 March — wear colourful clothing!'}],
-  '2026-3-4':  [{t:'e',l:'🌈 Holi Celebration',tip:'School Holi — Festival of Colours. Cultural appreciation, creative activities, community spirit.'}],
-  '2026-3-5':  [{t:'s',l:'🏊 Swimming Reg. 17:00',tip:'Register at schwimmkurse-sportjugend.de. First come first served. Activate code within 72h.'}],
-  '2026-3-6':  [{t:'t',l:'📬 Weekly Update 4C',tip:'Week 2–6 Mar: SEL Zones of Regulation, PowerPoint basics, fractions, hardware research. Next week = A Week (no sport Fri).'}],
-  '2026-3-12': [{t:'t',l:'🔤 Spelling Test',tip:'Weekly spelling test for Elias (4C) — every Thursday.'}],
-  '2026-3-20': [{t:'u',l:'🌸 Spring Prog. Deadline',tip:'Midnight deadline — register for Spring Vacation Program. Only register days child will definitely attend.'}],
+  // March
+  '2026-3-1':  [{t:'t',l:'📰 Newsletter #8',tip:'BCS Primary newsletter #8 in EN & DE.'}],
+  '2026-3-4':  [{t:'e',l:'🌈 Holi Celebration',tip:'Festival of Colours — cultural appreciation, creative activities.'}],
+  '2026-3-5':  [{t:'s',l:'🏊 Swimming Reg.',tip:'Easter swimming registration opened 17:00 at schwimmkurse-sportjugend.de.'}],
+  '2026-3-6':  [{t:'t',l:'📬 Weekly Update 4C',tip:'Fractions, PowerPoint, hardware research. Next week = A Week.'}],
+  '2026-3-13': [{t:'t',l:'📬 Weekly Update 4C',tip:'Stranger safety SEL, OneDrive/Outlook ICT, inventor fact files on Canva, paired reading with 1C. Next week = B Week (sport Friday).'}],
+  '2026-3-14': [{t:'e',l:'👥 Parent Info Session',tip:'Talking with children about strangers & tricky adults. Teams: 317 932 947 531 87, passcode: qs37N5Xj. Was 19 Mar 20:00–21:15.'}],
+  '2026-3-19': [{t:'e',l:'👥 Parent Info Session',tip:'Online: Talking with children about strangers & tricky adults. Teams 20:00–21:15.'}],
+  '2026-3-20': [
+    {t:'u',l:'🌸 Spring Prog. Deadline',tip:'Midnight — last chance to register for Spring Vacation Program.'},
+    {t:'e',l:'😴 Pyjama Day · City',tip:'Abitur Motto Week: Primary students at City Campus invited to wear pyjamas today in support of Abitur students.'}
+  ],
+  '2026-3-21': [{t:'e',l:'🌙 Bayram Celebration',tip:'Eid/Bayram celebration at both Nature and City Campus — gratitude, generosity, intercultural learning.'}],
+  '2026-3-25': [{t:'s',l:'📖 Book Drop-off',tip:'Drop a book to your classroom teacher by today for the Spring Vacation Book Exchange on 27 Mar.'}],
+  '2026-3-26': [{t:'e',l:'⚽ U20 Football',tip:'Germany vs Czech Republic U20. Poststadion Berlin, Lehrter Str. 59. Kick-off 16:45 (entry 15:45). No parking — use public transport.'}],
+  '2026-3-27': [
+    {t:'e',l:'✏️ End of Unit 4 Celebration',tip:'4C Technology summative celebration. Parents invited from 14:20. Come ready with questions for Elias!'},
+    {t:'e',l:'📚 Book Exchange',tip:'Spring Vacation Book Exchange during school hours. Bring one, take one!'}
+  ],
+  '2026-3-29': [{t:'e',l:'💃 Knotentanz',tip:'Optional parent dance event. School cafeteria, Rückerstraße 9. 16:00–17:30 beginners / 17:45–19:15 advanced. Self-paid.'}],
   '2026-3-30': [{t:'n',l:'🌲 Spring Session 1',tip:'Session 1: Mar 30–Apr 2. Hackescher Markt 8:45 (1st Tunnel). Pick-up 16:30.'}],
+  // April
   '2026-4-7':  [{t:'n',l:'🌲 Spring Session 2',tip:'Session 2: Apr 7–10. Hackescher Markt 8:45. Pick-up 16:30.'}],
-  '2026-4-20': [{t:'e',l:'🏄 Water Sports Intro',tip:'Intro & orientation session by water sports school. Gr 3 & 4. 11:00–11:30.'}],
-  '2026-4-22': [{t:'e',l:'🏄 Water Sports Intro',tip:'Second intro session for Gr 3 & 4. 11:00–11:30.'}],
+  '2026-4-20': [{t:'e',l:'🏄 Water Sports Intro',tip:'Orientation for Gr 3 & 4. 11:00–11:30.'}],
+  '2026-4-22': [{t:'e',l:'🏄 Water Sports Intro',tip:'Second orientation session for Gr 3 & 4. 11:00–11:30.'}],
+  // May — Water Sports
   '2026-5-4':  [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. Neoprene wetsuit + water shoes required. Stand at jetty in wetsuit.'}],
-  '2026-5-6':  [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. A Week.'}],
-  '2026-5-11': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. B Week.'}],
-  '2026-5-13': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. B Week.'}],
-  '2026-5-18': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. A Week.'}],
-  '2026-5-20': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. A Week.'}],
-  '2026-5-27': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. B Week.'}],
-  '2026-6-1':  [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. A Week.'}],
-  '2026-6-3':  [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. A Week.'}],
-  '2026-6-8':  [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. B Week.'}],
-  '2026-6-10': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. B Week.'}],
+  '2026-5-6':  [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  '2026-5-11': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45.'}],
+  '2026-5-13': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  '2026-5-18': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45.'}],
+  '2026-5-20': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  '2026-5-27': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  // June
+  '2026-6-1':  [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45.'}],
+  '2026-6-3':  [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  '2026-6-8':  [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45.'}],
+  '2026-6-10': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
   '2026-6-12': [{t:'e',l:'🎵 6K United Concert',tip:'Grades 2–6. Families invited. Consent form required.'}],
-  '2026-6-15': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. A Week. Surf Certificate awarded at end of programme!'}],
-  '2026-6-17': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. A Week.'}],
-  '2026-6-22': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. B Week.'}],
-  '2026-6-24': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. B Week. Water Sports Certificate at end of programme!'}],
+  '2026-6-15': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45. Surf Certificate awarded at end of programme!'}],
+  '2026-6-17': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45.'}],
+  '2026-6-22': [{t:'n',l:'🏄 Water Sports · 4C',tip:'4C Mon 10:45–12:45.'}],
+  '2026-6-24': [{t:'n',l:'🏄 Water Sports · 3C',tip:'3C Wed 10:45–12:45. Water Sports Certificate awarded!'}],
+  // July
   '2026-7-6':  [{t:'e',l:'🏕️ Water Sports Camp',tip:'3-day camp for classes 1c–4c. Bus to water sports school. 10:00–12:00 & 13:00–15:00.'}],
-  '2026-7-7':  [{t:'e',l:'🏕️ Water Sports Camp',tip:'Day 2 — swimwear, towel, water shoes, sun protection. Non-swimmers wear life jackets.'}],
-  '2026-7-8':  [{t:'e',l:'🏕️ Camp + Closing Party',tip:'Final camp day + Closing Party from 14:00 (parents welcome). School ends 15:00. Report cards issued. Clear lockers beforehand!'}],
+  '2026-7-7':  [{t:'e',l:'🏕️ Water Sports Camp',tip:'Day 2. Swimwear, towel, water shoes, sun protection. Non-swimmers wear life jackets.'}],
+  '2026-7-8':  [{t:'e',l:'🏕️ Camp + 🎉 Closing Party',tip:'Final camp day. Closing Party from 14:00 — parents invited! School ends 15:00. Report cards issued. Clear lockers beforehand.'}],
 };
 
 const WEEK_NOTES = {
+  '2026-3-16': [
+    {icon:'🌱',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'End of Unit 4 Summative · Elias',date:'18 Mar 2026',tag:'Class Update',tg:'tg-g',
+     body:'4C have started their End of Unit Summative Project this week — a large-scope project spread over the coming 1–2 weeks. The End of Unit Celebration is on Friday 27 March at 14:20 and all parents are warmly invited.',
+     highlights:[
+       {ic:'📅',t:'Celebration: Friday 27 March at 14:20 — parents invited!'},
+       {ic:'🗓️',t:'Students planned their own schedule on Monday — practising self-management'},
+       {ic:'💻',t:'Some students may use 3D-modelling software at home (optional)'},
+       {ic:'📋',t:'Rubric, parent questioning guide, and schedule attached on Toddle'},
+       {ic:'❓',t:'Check Toddle for suggested questions to ask Elias at the celebration'},
+     ],
+     action:'Attend End of Unit Celebration on Fri 27 Mar at 14:20. Support Elias with self-management this week.'},
+    {icon:'🌙',cls:'ic-y',from:'Katharina Ehrenfried · Primary',sub:'Bayram, Pyjama Day & Community Events · Both children',date:'17 Mar 2026',tag:'Announcement',tg:'tg-b',
+     body:'Bayram (Eid) celebrated at both campuses on Friday 21 March. City Campus Primary students invited to wear pyjamas on Fri 20 Mar to support Abitur Motto Week. Community football match 26 Mar.',
+     highlights:[
+       {ic:'🌙',t:'Bayram celebration Fri 21 Mar at Nature + City Campus'},
+       {ic:'😴',t:'Pyjama Day Fri 20 Mar at City Campus — optional, in support of Abitur students'},
+       {ic:'⚽',t:'U20 Germany vs Czech Republic · 26 Mar · Poststadion Berlin · 16:45 kick-off'},
+       {ic:'🚌',t:'No parking at stadium — public transport recommended (15 min walk from Hbf)'},
+     ]},
+    {icon:'👥',cls:'ic-p',from:'Katharina Ehrenfried · Primary',sub:'Stranger Safety Info Session · Both children',date:'14 Mar 2026',tag:'Announcement',tg:'tg-p',
+     body:'Parent information session on talking with children about strangers and tricky adults — held online 19 March 20:00–21:15. Covers safety, intuition, building confidence and open conversations at home.',
+     highlights:[
+       {ic:'💻',t:'Teams Meeting ID: 317 932 947 531 87 · Passcode: qs37N5Xj'},
+       {ic:'🗓️',t:'Date: Thu 19 March · 20:00–21:15'},
+       {ic:'🏠',t:'Tips for supporting open safety conversations at home'},
+     ]},
+    {icon:'📚',cls:'ic-g',from:'Tanya Diaz · SEL Team',sub:'Spring Vacation Book Exchange · Both children',date:'20 Mar 2026',tag:'Announcement',tg:'tg-g',
+     body:'Before every vacation, BCS runs its beloved Book Exchange — bring one, take one! Drop a book to the classroom teacher by Wednesday 25 March. The exchange itself happens on Friday 27 March.',
+     highlights:[
+       {ic:'📖',t:'Drop-off deadline: Wednesday 25 March (to classroom teacher)'},
+       {ic:'🔄',t:'Exchange day: Friday 27 March during school hours'},
+       {ic:'➕',t:'Children may bring more than one book, but only one is exchanged'},
+     ],
+     action:'Pack a book in Elias\'s and Isagani\'s bag by Wednesday 25 March'},
+  ],
+  '2026-3-9': [
+    {icon:'🌱',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'Weekly Update 09–13 Mar · Elias',date:'13 Mar 2026',tag:'Weekly Update',tg:'tg-g',
+     body:'A rich week in 4C: SEL stranger safety, ICT OneDrive/Outlook file management, inventor fact files on Canva, mixed number/improper fraction practice, paired reading with 1C, and a forest classroom meeting.',
+     highlights:[
+       {ic:'🔒',t:'SEL: how to stay safe if lost or approached by strangers'},
+       {ic:'💻',t:'ICT: moving files between OneDrive and Outlook'},
+       {ic:'🔬',t:'Inventor research → Canva fact files (may wish to finish at home, max 20–30 min)'},
+       {ic:'📖',t:'Paired reading with 1C — new reading partners!'},
+       {ic:'🌲',t:'Classroom meeting in the forest'},
+       {ic:'📅',t:'Next week = B Week — sport on Friday!'},
+     ],
+     action:'Support Elias with any Canva inventor research (20–30 min max). Next week = B Week.'},
+  ],
   '2026-3-2': [
     {icon:'🌱',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'Weekly Update 02–06 Mar · Elias',date:'6 Mar 2026',tag:'Weekly Update',tg:'tg-g',
-     body:'A productive week in 4C! SEL Zones of Regulation, PowerPoint basics (title slides), library session for Women\'s History Month, equivalent & simplified fractions, hardware component research posters, punctuation detectives, and weekly write.',
+     body:'SEL Zones of Regulation, PowerPoint basics, Women\'s History Month library session, fractions (equivalent, simplifying, improper↔mixed), hardware component research posters, punctuation work.',
      highlights:[
        {ic:'➗',t:'Fractions: equivalent, simplifying, improper ↔ mixed numbers'},
-       {ic:'💻',t:'PowerPoint basics — title slides this week'},
-       {ic:'🖥️',t:'Hardware components research posters completed'},
-       {ic:'✍️',t:'Punctuation detectives task + unit-themed weekly write'},
-       {ic:'📅',t:'Next week = A Week — no sport on Friday!'},
-       {ic:'🏠',t:'Some students have work to finish — encourage this weekend'},
+       {ic:'💻',t:'PowerPoint basics — title slides'},
+       {ic:'🖥️',t:'Hardware components research posters'},
+       {ic:'📅',t:'Next week = A Week — no sport on Friday'},
      ],
-     action:'Check pencil case is fully stocked. Encourage any unfinished schoolwork this weekend.'},
+     action:'Fully stocked pencil case required. Encourage any unfinished work this weekend.'},
     {icon:'🏄',cls:'ic-b',from:'Katharina Ehrenfried · Primary',sub:'Water Sports Programme · Elias (4C)',date:'6 Mar 2026',tag:'Action Required',tg:'tg-r',
-     body:'Water Sports Programme starts 1 May for Grades 3 & 4. Elias (4C) has Monday sessions 10:45–12:45. Children must be confident swimmers (Freischwimmer = 25m continuously). Kit is mandatory for safety.',
+     body:'Water Sports Programme starts 1 May. Elias (4C) has Mondays 10:45–12:45. Must be confident swimmer (25m). Kit is mandatory for safety — buy before May.',
      highlights:[
        {ic:'🤿',t:'Required: neoprene wetsuit (long arms & legs)'},
        {ic:'👟',t:'Required: water shoes (non-slip, secure fit)'},
-       {ic:'🩱',t:'Also: swimwear under wetsuit, towel, hat/cap for after'},
-       {ic:'📅',t:'Intro sessions: 20 & 22 April 11:00–11:30'},
-       {ic:'📅',t:'4C first session: Monday 4 May, 10:45–12:45'},
-       {ic:'🏅',t:'Grade 4 earns Surf Certificate at end of programme'},
+       {ic:'📅',t:'Intro: 20 & 22 April 11:00–11:30 · First session: Mon 4 May'},
+       {ic:'🏅',t:'Grade 4 earns Surf Certificate at end'},
      ],
-     action:'Buy neoprene wetsuit + water shoes before May. Confirm Elias can swim 25m. Email teacher if he cannot.'},
-    {icon:'🏕️',cls:'ic-b',from:'Katharina Ehrenfried · Primary',sub:'Water Sports Camp · Both children',date:'6 Mar 2026',tag:'Announcement',tg:'tg-b',
-     body:'End-of-year 3-day water sports camp for classes 1c–4c, 6–8 July. Children bussed to water sports school, 10:00–12:00 and 13:00–15:00 daily. Closing party on 8 July from 14:00.',
+     action:'Buy neoprene wetsuit + water shoes before May. Confirm Elias swims 25m.'},
+    {icon:'🌸',cls:'ic-y',from:'Heather Newkirk · SEL',sub:'Spring Vacation Program · Both children',date:'3 Mar 2026',tag:'Action Required',tg:'tg-r',
+     body:'Spring Vacation Program registration closed 20 March. Sessions Mar 30–Apr 2 and Apr 7–10 at Nature Campus.',
      highlights:[
-       {ic:'🚌',t:'Bussed directly to water sports school and back each day'},
-       {ic:'🎉',t:'8 July: Closing party 14:00, school ends 15:00, report cards issued'},
-       {ic:'🔑',t:'Clear all lockers from school building before camp starts'},
-       {ic:'🏊',t:'Non-swimmers must wear life jackets — inform class teacher'},
+       {ic:'📅',t:'Session 1: Mar 30 – Apr 2 · Session 2: Apr 7–10'},
+       {ic:'🚉',t:'Meet Hackescher Markt 8:45 (1st Tunnel) · Pick-up 16:30'},
      ]},
-    {icon:'🌈',cls:'ic-y',from:'Katharina Ehrenfried · Primary',sub:'Holi Celebration · Both children',date:'3 Mar 2026',tag:'Announcement',tg:'tg-b',
-     body:'Holi — Festival of Colours — was celebrated on 4 March. Children wore colourful clothing to learn about Indian and Nepalese cultural traditions and celebrate diversity and community through creative activities.',
-     highlights:[
-       {ic:'🎨',t:'Focus: cultural meaning of Holi, diversity, international-mindedness'},
-       {ic:'🙏',t:'Thank you to parent volunteers around Shruti for helping organise'},
-     ]},
-    {icon:'🌸',cls:'ic-y',from:'Heather Newkirk · SEL / Nature Campus',sub:'Spring Vacation Program · Both children',date:'3 Mar 2026',tag:'Action Required',tg:'tg-r',
-     body:'Spring Vacation Program registration is open. Choose City or Nature Campus. Sessions Mar 30–Apr 2 and Apr 7–10 with hiking, sports, creative arts, sustainability and service learning.',
-     highlights:[
-       {ic:'📅',t:'Session 1: March 30 – April 2'},
-       {ic:'📅',t:'Session 2: April 7 – April 10'},
-       {ic:'🚉',t:'Meet Hackescher Markt 8:45 sharp (1st Tunnel entrance)'},
-       {ic:'🏃',t:'Pick-up 16:30 · Early care 8:00 / Late care 17:30 (City Campus)'},
-     ],
-     action:'Register by midnight 20 March — only register days your child will definitely attend'},
   ],
   '2026-2-23': [
     {icon:'🌱',cls:'ic-g',from:'Mr. Daniel Vevers · 4C',sub:'Weekly Update 23 Feb · Elias',date:'23 Feb 2026',tag:'Weekly Update',tg:'tg-g',
-     body:'Unit 4 launched: "How the World Works — Technologies Impact Society and the Environment." Long division introduced, TypeDojo touch-typing, stone-age technology explored with tableaux.',
+     body:'Unit 4 launched: "How the World Works — Technologies Impact Society and the Environment." Long division, TypeDojo, stone-age technology tableaux.',
      highlights:[
-       {ic:'📐',t:'Long division introduced — practise with Hit the Button'},
+       {ic:'📐',t:'Long division — practise with Hit the Button'},
        {ic:'⌨️',t:'TypeDojo touch-typing accounts created'},
        {ic:'🔤',t:'Spelling test every Thursday'},
-       {ic:'📅',t:'A Week — sport on Friday'},
      ],
-     action:'Fully-stocked pencil case required (pencil, eraser, sharpener, ruler)'},
+     action:'Fully-stocked pencil case required'},
   ],
 };
 
 let curDate = new Date(2026, 2, 1);
 
 function renderCalendar(){
-  const yr=curDate.getFullYear(), mo=curDate.getMonth();
+  const yr=curDate.getFullYear(),mo=curDate.getMonth();
   document.getElementById('calTitle').textContent=MONTHS[mo]+' '+yr;
   const wt=weekType(getMon(TODAY));
   document.getElementById('calSub').textContent=`Currently: ${wt} Week · ${wt==='A'?'Sport on Friday':'No sport Friday'}`;
   document.getElementById('currentWkBadge').textContent=wt+' WEEK';
-  const grid=document.getElementById('calGrid'); grid.innerHTML='';
+  const grid=document.getElementById('calGrid');grid.innerHTML='';
   const firstDay=new Date(yr,mo,1),lastDay=new Date(yr,mo+1,0);
   let wStart=getMon(firstDay);
   while(wStart<=lastDay){
@@ -420,7 +469,7 @@ function renderNotes(yr,mo){
       });
     }
   });
-  if(!found)grid.innerHTML=`<div style="color:var(--muted);font-size:13px;padding:20px 0;">No notes for this month. Navigate to March to see this week's updates.</div>`;
+  if(!found)grid.innerHTML=`<div style="color:var(--muted);font-size:13px;padding:20px 0;">No notes for this month. Navigate to March to see current updates.</div>`;
 }
 
 renderCalendar();
